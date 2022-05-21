@@ -1,0 +1,19 @@
+.svg-inline--fa{
+    margin-right: 5px;
+}
+
+.nav-item{
+    margin-right: 8px;
+}
+
+.navbar{
+    color: $black;
+    a{
+        color: $black;
+        text-decoration: none;
+        font-weight: bold;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}

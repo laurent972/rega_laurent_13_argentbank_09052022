@@ -5,6 +5,7 @@ const swaggerUi = require('swagger-ui-express')
 const yaml = require('yamljs')
 const swaggerDocs = yaml.load('./swagger.yaml')
 const dbConnection = require('./database/connection')
+const jwt = require('jsonwebtoken')
 
 dotEnv.config()
 
