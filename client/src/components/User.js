@@ -1,9 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { TokenContext } from '../components/AppContext';
-
+import {useSelector} from "react-redux";
+import { useDispatch } from 'react-redux';
+import {getUserInfo} from '../reducers/user.reducer'
 
 const User = () => {
   const token= useContext(TokenContext)
+  const user = useSelector((state) => state.user.value)
+  const dispatch = useDispatch();
+console.log(user);
   let [data, setData] = useState({})
   //Get  data from API
   async function getData(userToken) {
@@ -16,7 +21,7 @@ const User = () => {
             },
             })
             data = await response.json();
-            return data.body
+            
      }catch(err){
          console.log(err);
      }
@@ -24,15 +29,17 @@ const User = () => {
   }
   // when token loaded, start function
   useEffect(()=>{
-    {token ? getData(token).then(response =>{setData(response)}) : console.log('erreur'); }
+    if(token) getData(token).then(response =>{
+      setData(response)
+      dispatch(getUserInfo(data.body)) 
+    })
   },[ token ])
-  
-  console.log(data);
+
     return (
      <>
      <main className="main bg-dark">
       <div className="header">
-        <h1>Welcome back<br />{data.firstName} {data.lastName} </h1>
+        <h1>Welcome back<br />{user.firstName} {user.lastName} </h1>
         <button className="edit-button">Edit Name</button>
       </div>
       <h2 className="sr-only">Accounts</h2>

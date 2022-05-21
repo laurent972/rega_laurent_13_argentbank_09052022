@@ -7,7 +7,7 @@ import App from './App';
 import './style/index.scss';
 
 import thunk from 'redux-thunk';
-import { applyMiddleware } from 'redux';
+
 
 
 
@@ -19,8 +19,10 @@ import logger from 'redux-logger'
 const store = configureStore (
   {
     reducer:{
-      userReducer
-    }
+      user:userReducer
+    },
+    middleware: [logger],
+    middleware: [thunk],
   }
 )
 

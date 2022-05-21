@@ -1,6 +1,14 @@
-// On Stock les infos de l'user
-const initialState = {};
+import { createSlice } from "@reduxjs/toolkit";
 
-export default function userReducer(state = initialState, action){
-    return initialState
-}
+
+export const userSlice = createSlice({
+    name: "user",
+    initialState: {value:{name:'toto'}},
+    reducers : {
+        getUserInfo : (state, action)=>{
+            state.value = action.payload
+        }
+    }
+})
+export const {getUserInfo} = userSlice.actions;
+export default userSlice.reducer
