@@ -22,8 +22,7 @@ const User = () => {
 
     return (
      <>
-     {isloaded && 
-      
+  
      <main className="main bg-dark">
       <div className="header">
        
@@ -62,9 +61,7 @@ const User = () => {
         </div>
       </section>
     </main>
-  }
-
-    <img src={loader} alt="" />
+ 
     
   </>
     );

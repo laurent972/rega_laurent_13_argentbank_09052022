@@ -24,12 +24,12 @@ const Header = () => {
 
                 <div className='main-nav-item'>
                
-                {logged ? (
+            
                  
                  <>
                    <NavLink to="/profil">
                     <FontAwesomeIcon icon= {faRightFromBracket} />
-                    {user.firstName}
+                    //{user.firstName}
                     </NavLink>
                    
                     <NavLink to="">
@@ -37,13 +37,13 @@ const Header = () => {
                      Sign out
                     </NavLink>
                     </>    
-                 ) : (   
+                 
                   
-                      <NavLink to="/profil">
+                      <NavLink to="/signin">
                       <FontAwesomeIcon icon= {faCircleUser} />
                       Sign In
                   </NavLink>
-                    )} 
+                   
                   
                 </div>
                  

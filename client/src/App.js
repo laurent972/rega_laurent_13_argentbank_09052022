@@ -1,30 +1,29 @@
 
-import Routes from './components/Routes';
-import { TokenContext } from './components/AppContext';
-import { useEffect, useState } from 'react';
-import { getAuth } from './reducers/auth.reducer';
-import { useDispatch } from 'react-redux';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Header from './components/Header'
+import Home from './pages/Home';
+import NotFound from './pages/NotFound';
+import Profil from './pages/Profil';
+import Footer from './components/Footer';
+import SignIn from './pages/SignIn';
 
 function App() {;
 
-const [token, setToken] = useState(null);
-const dispatch = useDispatch();
-
-
-  useEffect(()=>{
-    if(localStorage.getItem('userToken') !== null) {
-      setToken(localStorage.getItem('userToken'));
-      dispatch(getAuth(true))
-    }
-  },[])
-  
 
 
   return (
     <>
-        <TokenContext.Provider value={token}>
-          <Routes />
-        </TokenContext.Provider>
+       
+        <BrowserRouter >
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/profil" element={<Profil />} />
+                    <Route path="/signin" element={<SignIn />} />
+                    <Route path="*" element={<NotFound />} />
+                </Routes>
+                <Footer />
+            </BrowserRouter>
 
     </>
   );

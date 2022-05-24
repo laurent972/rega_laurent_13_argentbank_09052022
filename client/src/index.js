@@ -18,10 +18,7 @@ const store = configureStore (
     reducer:{
       user:userReducer,
       auth:authReducer
-    },
-    middleware: [logger],
-    // gère le chargement asynchrone
-    middleware: [thunk]
+    }
   }
 )
 

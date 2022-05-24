@@ -20,7 +20,6 @@ const SignIn = () => {
     setInterval(() => {
       window.location='/profil'
     }, 350);
-    
   }
 
     return (

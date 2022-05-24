@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from 'react';
-import SignIn from '../components/Logins/SignIn';
+
 import User from '../components/User';
 import {useSelector} from "react-redux";
 
@@ -11,7 +11,6 @@ const Profil = () => {
     console.log(logged);
     return (
         <>
-       
            <User /> 
         </> 
     );
