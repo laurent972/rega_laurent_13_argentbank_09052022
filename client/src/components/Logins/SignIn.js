@@ -1,53 +1,34 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCircleUser} from '@fortawesome/free-solid-svg-icons';
-import { useDispatch } from 'react-redux';
+import { handleLogin } from '../../api/services';
+
 
 const SignIn = () => {
-
+    
+  const message = document.querySelector('.login.error');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(false)
+  
+  const login = (e) =>{
+    e.preventDefault();
+    handleLogin(email,password, error, message)
+    .then(response => setError(response));
+    if(!error=== false) message.innerHTML = '';
 
-
-    const handleLogin =  (e) =>{
-      const message = document.querySelector('.login.error');
-        e.preventDefault();
-        console.log(email);
-        console.log(password);
-        
-        fetch(`http://localhost:3001/api/v1/user/login`,{
-          method:"POST",
-          headers: {
-            "Content-Type":"application/json",
-            "Accept": "application/json"
-          },
-          body: JSON.stringify({email, password})
-        })
-        .then((res)=>res.json())
-        .then((res) =>{
-          console.log(res);
-          if(!res.status===200){
-            message.innerHTML = res.message;
-            setError(true)
-          }else{
-            console.log(res.body.token);
-            localStorage.setItem('userToken', res.body.token)
-            //window.location='/'
-          }
-        } )
-        .catch((err) => {
-          console.log(err.message);
-      })
-   
-    }
+    setInterval(() => {
+      window.location='/profil'
+    }, 350);
+    
+  }
 
     return (
         <main className="main bg-dark">
         <section className="sign-in-content">
         <FontAwesomeIcon icon= {faCircleUser} />
           <h1>Sign In</h1>
-          <form onSubmit={handleLogin}>
+          <form onSubmit={login}>
             <div className="input-wrapper">
               <label htmlFor="email">E-Mail</label>
               <input type="email" id="email" className={error ? "inputError" : 'default'} onChange={(e) => setEmail(e.target.value)} />

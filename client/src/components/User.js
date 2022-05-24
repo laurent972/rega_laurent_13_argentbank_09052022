@@ -1,45 +1,33 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { TokenContext } from '../components/AppContext';
+import React, { useEffect, useState } from 'react';
 import {useSelector} from "react-redux";
+import loader from '../assets/img/loading.gif';
+import { getData } from '../api/services';
 import { useDispatch } from 'react-redux';
-import {getUserInfo} from '../reducers/user.reducer'
+import { getUserInfo } from '../reducers/user.reducer';
 
 const User = () => {
-  const token= useContext(TokenContext)
-  const user = useSelector((state) => state.user.value)
+ 
   const dispatch = useDispatch();
-console.log(user);
-  let [data, setData] = useState({})
-  //Get  data from API
-  async function getData(userToken) {
-     try{
-        let response = await fetch('http://localhost:3001/api/v1/user/profile',{
-            method:"POST",
-            headers: {
-                "Content-Type":"application/json",
-                "Authorization": 'Bearer'+ userToken
-            },
-            })
-            data = await response.json();
-            
-     }catch(err){
-         console.log(err);
-     }
-    
-  }
-  // when token loaded, start function
-  useEffect(()=>{
-    if(token) getData(token).then(response =>{
-      setData(response)
-      dispatch(getUserInfo(data.body)) 
-    })
-  },[ token ])
+  const [isloaded, setIsLoaded] = useState(false);
+  const user = useSelector((state) => state.user.value);
+  const logged = useSelector((state) => state.auth.value)
+
+  
+    useEffect(()=>{
+        getData().then(response => dispatch(getUserInfo(response)));
+        setIsLoaded(true)
+    }, [])
+
+    console.log(user,isloaded);
 
     return (
      <>
+     {isloaded && 
+      
      <main className="main bg-dark">
       <div className="header">
-        <h1>Welcome back<br />{user.firstName} {user.lastName} </h1>
+       
+        <h1>Welcome back<br /> {user.firstName} {user.lastName} </h1>
         <button className="edit-button">Edit Name</button>
       </div>
       <h2 className="sr-only">Accounts</h2>
@@ -74,7 +62,11 @@ console.log(user);
         </div>
       </section>
     </main>
-        </>
+  }
+
+    <img src={loader} alt="" />
+    
+  </>
     );
 };
 
