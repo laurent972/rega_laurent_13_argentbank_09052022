@@ -19,7 +19,7 @@ const User = () => {
 
   const reset = () =>{
     setEdit(false)
-    window.location='/profil'
+    
   }
 
   const handleUpdate = (e) =>{
