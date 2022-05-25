@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faCircleUser} from '@fortawesome/free-solid-svg-icons';
 import { handleLogin } from '../../api/services';
+import { useDispatch } from "react-redux";
 
 
 const SignIn = () => {
-    
+  const dispatch = useDispatch();
   const message = document.querySelector('.login.error');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -17,9 +18,10 @@ const SignIn = () => {
     .then(response => setError(response));
     if(!error=== false) message.innerHTML = '';
 
+  
     setInterval(() => {
-      window.location='/profil'
-    }, 350);
+     window.location='/profil'
+    }, 380);
   }
 
     return (

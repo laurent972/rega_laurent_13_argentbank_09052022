@@ -5,14 +5,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
 import {faCircleUser} from '@fortawesome/free-solid-svg-icons';
 import { useSelector } from 'react-redux';
+import Logout from './Logins/Logout';
 
 
 const Header = () => {
-  
-  
-        const user = useSelector((state) => state.user.value)
-        const logged = useSelector((state) => state.auth.value);
-        console.log(logged,user);
+    const user = useSelector((state) => state.userReducer.user);
+    const token = localStorage.getItem("userToken");
     return (
         <>
             <nav className="main-nav">
@@ -21,29 +19,30 @@ const Header = () => {
                 <img src={logo} alt="" width="200" />
                 </NavLink>
 
-
                 <div className='main-nav-item'>
-               
-            
-                 
-                 <>
+
+                
+                 {token ? (
+                      <>
                    <NavLink to="/profil">
-                    <FontAwesomeIcon icon= {faRightFromBracket} />
-                    //{user.firstName}
+                    <FontAwesomeIcon icon= {faCircleUser} />
+                        {user.firstName}
                     </NavLink>
                    
                     <NavLink to="">
-                    <FontAwesomeIcon icon= {faRightFromBracket} />
-                     Sign out
+                        <FontAwesomeIcon icon= {faRightFromBracket} />
+                        <Logout/>
                     </NavLink>
                     </>    
-                 
-                  
+                    ):(
+ 
                       <NavLink to="/signin">
                       <FontAwesomeIcon icon= {faCircleUser} />
                       Sign In
-                  </NavLink>
-                   
+                     </NavLink>
+                    )
+                  
+                   }
                   
                 </div>
                  

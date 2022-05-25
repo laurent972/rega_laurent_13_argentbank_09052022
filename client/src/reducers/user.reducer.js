@@ -1,14 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { GET_USER, UPDATE_PROFIL } from "../actions/user.actions";
 
+   const initialState = {
+      isLogged: false,
+      user:{}
+   };
 
-export const userSlice = createSlice({
-    name: "user",
-    initialState: {value:{email: '', firstName: '', lastName: '', createdAt: '', updatedAt: ''}},
-    reducers : {
-        getUserInfo : (state, action)=>{
-            state.value = action.payload
-        }
-    }
-})
-export const {getUserInfo} = userSlice.actions;
-export default userSlice.reducer
+   export default function userReducer(state=initialState, action){
+         switch (action.type) {
+            case GET_USER:
+               return{
+                  ...state,
+                  isLogged: true,
+                  user: action.payload,
+               };
+            
+               case UPDATE_PROFIL:
+                  return{
+                     ...state,
+                     user: action.payload,
+                  } 
+
+            default:
+               return state;
+         }
+   }
