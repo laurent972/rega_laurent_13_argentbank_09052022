@@ -1,4 +1,4 @@
-import { GET_USER, UPDATE_PROFIL } from "../actions/user.actions";
+import { GET_USER, UPDATE_PROFIL, LOGOUT } from "../actions/user.actions";
 
    const initialState = {
       isLogged: false,
@@ -14,11 +14,16 @@ import { GET_USER, UPDATE_PROFIL } from "../actions/user.actions";
                   user: action.payload,
                };
             
-               case UPDATE_PROFIL:
-                  return{
-                     ...state,
-                     user: action.payload,
-                  } 
+            case UPDATE_PROFIL:
+               return{
+               ...state,
+                user: action.payload,
+               };
+            case LOGOUT:
+               return{
+                  ...state,
+                  isLogged: false,
+               }       
 
             default:
                return state;

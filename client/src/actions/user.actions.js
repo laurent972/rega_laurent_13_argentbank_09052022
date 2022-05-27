@@ -1,5 +1,6 @@
 export const GET_USER = 'GET_USER';
 export const UPDATE_PROFIL = 'UPDATE_PROFIL';
+export const LOGOUT = 'LOGOUT';
 
 
 export const getUser = (token) => {
@@ -36,3 +37,4 @@ export const updateProfil = ( firstName, lastName, token) =>{
         .catch((err)=> console.log(err))
     }
 }
+
