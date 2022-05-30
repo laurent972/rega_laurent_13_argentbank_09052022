@@ -1,6 +1,4 @@
 
-
-
 // login
 export const handleLogin =  async (email,password, error, message) =>{
   

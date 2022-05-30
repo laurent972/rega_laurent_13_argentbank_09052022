@@ -25,8 +25,6 @@ const store = createStore(
 //       user:userReducer,
 //       auth:authReducer
 //     }
-    
-    
 //   }
 // )
 
